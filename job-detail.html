@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail - Your Platform Name</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        /* Additional styles specific to job detail page */
+        .breadcrumb {
+            display: flex;
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-sm);
+        }
+
+        .breadcrumb a {
+            color: var(--text-light);
+        }
+
+        .breadcrumb .separator {
+            margin: 0 var(--spacing-xs);
+            color: var(--text-light);
+        }
+
+        .breadcrumb .current {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .job-detail-section {
+            padding: var(--spacing-xl) 0 var(--spacing-xxl);
+        }
+
+        .job-detail-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .job-header-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .job-title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .job-title-info h1 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .job-meta-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+        }
+
+        .job-budget-large {
+            font-size: var(--font-size-xl);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .job-tag {
+            background-color: var(--light-bg);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+        }
+
+        .content-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .content-card h2 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .requirements-list li {
+            margin-bottom: var(--spacing-sm);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+
+        .requirements-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .job-client-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .client-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .client-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .client-info h3 {
+            margin-bottom: 0;
+        }
+
+        .client-location {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+        }
+
+        .client-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .client-stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        .similar-jobs-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-lg);
+        }
+
+        .similar-job-item {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .similar-job-item:last-child {
+            border-bottom: none;
+        }
+
+        .similar-job-title {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .similar-job-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 992px) {
+            .job-detail-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="/api/placeholder/150/40" alt="Logo">
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="jobs.html" class="active">Jobs</a></li>
+                    <li><a href="workers.html">Workers</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+                <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Job Detail Section -->
+    <section class="job-detail-section bg-light">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="jobs.html">Jobs</a>
+                <span class="separator">/</span>
+                <span class="current">Web Developer Needed for E-commerce Platform</span>
+            </div>
+
+            <div class="job-detail-container">
+                <!-- Left Column - Job Details -->
+                <div class="job-main-content">
+                    <!-- Job Header Card -->
+                    <div class="job-header-card">
+                        <div class="job-title-section">
+                            <div class="job-title-info">
+                                <h1>Web Developer Needed for E-commerce Platform</h1>
+                                <span class="job-category">Web Development</span>
+                            </div>
+                            <div class="job-budget-large">$2,500 - $3,500</div>
+                        </div>
+
+                        <div class="job-meta-list">
+                            <div class="job-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Remote</span>
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Posted 2 days ago</span>
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>3-4 weeks project</span>
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Full-time</span>
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Intermediate level</span>
+                            </div>
+                        </div>
+
+                        <div class="job-actions">
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                            <a href="#" class="btn btn-outline">Save Job</a>
+                        </div>
+
+                        <div class="job-tags">
+                            <span class="job-tag">HTML5</span>
+                            <span class="job-tag">CSS3</span>
+                            <span class="job-tag">JavaScript</span>
+                            <span class="job-tag">React</span>
+                            <span class="job-tag">Node.js</span>
+                            <span class="job-tag">MongoDB</span>
+                        </div>
+                    </div>
+
+                    <!-- Job Description -->
+                    <div class="content-card">
+                        <h2>Job Description</h2>
+                        <p>We are looking for an experienced web developer to help us build a modern e-commerce
+                            platform. The ideal candidate will have strong skills in front-end and back-end development,
+                            with expertise in React and Node.js.</p>
+
+                        <p>Our company specializes in selling handmade crafts and we need a platform that can showcase
+                            our products beautifully while providing a seamless shopping experience for our customers.
+                        </p>
+
+                        <p>The successful candidate will work closely with our design team to implement the UI/UX
+                            designs and ensure that the platform is responsive, fast, and accessible.</p>
+                    </div>
+
+                    <!-- Job Requirements -->
+                    <div class="content-card">
+                        <h2>Requirements</h2>
+                        <ul class="requirements-list">
+                            <li>At least 3 years of experience in web development</li>
+                            <li>Strong proficiency in HTML5, CSS3, and JavaScript</li>
+                            <li>Experience with React.js and Node.js</li>
+                            <li>Familiarity with MongoDB or similar NoSQL databases</li>
+                            <li>Understanding of RESTful APIs and modern web protocols</li>
+                            <li>Knowledge of responsive design and cross-browser compatibility</li>
+                            <li>Experience with e-commerce platforms is a plus</li>
+                            <li>Ability to work independently and meet deadlines</li>
+                            <li>Strong communication skills and attention to detail</li>
+                        </ul>
+                    </div>
+
+                    <!-- Responsibilities -->
+                    <div class="content-card">
+                        <h2>Responsibilities</h2>
+                        <ul class="requirements-list">
+                            <li>Develop and maintain our e-commerce platform using React.js and Node.js</li>
+                            <li>Implement responsive designs and ensure cross-browser compatibility</li>
+                            <li>Integrate with payment gateways and shipping APIs</li>
+                            <li>Optimize application for maximum speed and scalability</li>
+                            <li>Collaborate with designers to implement UI/UX features</li>
+                            <li>Ensure the technical feasibility of UI/UX designs</li>
+                            <li>Maintain code quality, organization, and automatization</li>
+                            <li>Troubleshoot and debug issues as they arise</li>
+                        </ul>
+                    </div>
+
+                    <!-- Application Process -->
+                    <div class="content-card">
+                        <h2>Application Process</h2>
+                        <p>To apply for this position, please submit your resume, portfolio, and a cover letter
+                            explaining why you are a good fit for this role. We also encourage you to share examples of
+                            your previous work, especially any e-commerce projects you have worked on.</p>
+
+                        <p>The selection process will involve:</p>
+                        <ol>
+                            <li>Initial resume screening</li>
+                            <li>Technical interview</li>
+                            <li>Practical coding test</li>
+                            <li>Final interview with the team</li>
+                        </ol>
+
+                        <p>We look forward to hearing from you!</p>
+
+                        <div class="job-actions" style="margin-top: var(--spacing-lg);">
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <div class="job-sidebar">
+                    <!-- Client/Company Card -->
+                    <div class="job-client-card">
+                        <div class="client-header">
+                            <div class="client-image">
+                                <img src="/api/placeholder/200/200" alt="Client Company">
+                            </div>
+                            <div class="client-info">
+                                <h3>ArtisanCraft Co.</h3>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>San Francisco, CA</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="client-stats">
+                            <div class="client-stat-item">
+                                <div class="stat-value">14</div>
+                                <div class="stat-label">Jobs Posted</div>
+                            </div>
+                            <div class="client-stat-item">
+                                <div class="stat-value">92%</div>
+                                <div class="stat-label">Hire Rate</div>
+                            </div>
+                            <div class="client-stat-item">
+                                <div class="stat-value">4.8</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                            <div class="client-stat-item">
+                                <div class="stat-value">$12K+</div>
+                                <div class="stat-label">Spent</div>
+                            </div>
+                        </div>
+
+                        <p>ArtisanCraft Co. is a growing e-commerce business specializing in handmade crafts and
+                            artisanal products. Founded in 2018, we connect talented artisans with customers who
+                            appreciate unique, high-quality items.</p>
+
+                        <a href="#" class="btn btn-outline" style="width: 100%;">View Company Profile</a>
+                    </div>
+
+                    <!-- Job Summary Card -->
+                    <div class="content-card">
+                        <h2>Job Summary</h2>
+                        <div class="job-meta-item" style="margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span><strong>Budget:</strong> $2,500 - $3,500</span>
+                        </div>
+                        <div class="job-meta-item" style="margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Duration:</strong> 3-4 weeks</span>
+                        </div>
+                        <div class="job-meta-item" style="margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-users"></i>
+                            <span><strong>Applicants:</strong> 12</span>
+                        </div>
+                        <div class="job-meta-item" style="margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-eye"></i>
+                            <span><strong>Views:</strong> 87</span>
+                        </div>
+                        <div class="job-meta-item" style="margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-briefcase"></i>
+                            <span><strong>Type:</strong> Full-time</span>
+                        </div>
+                        <div class="job-meta-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span><strong>Experience:</strong> Intermediate</span>
+                        </div>
+                    </div>
+
+                    <!-- Similar Jobs Card -->
+                    <div class="similar-jobs-card">
+                        <h2>Similar Jobs</h2>
+
+                        <div class="similar-job-item">
+                            <h3 class="similar-job-title">
+                                <a href="#">Frontend Developer for Mobile App</a>
+                            </h3>
+                            <div class="similar-job-meta">
+                                <span><i class="fas fa-dollar-sign"></i> $2,000 - $3,000</span>
+                                <span><i class="fas fa-clock"></i> 3 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="similar-job-item">
+                            <h3 class="similar-job-title">
+                                <a href="#">React Developer for Dashboard Project</a>
+                            </h3>
+                            <div class="similar-job-meta">
+                                <span><i class="fas fa-dollar-sign"></i> $1,800 - $2,500</span>
+                                <span><i class="fas fa-clock"></i> 5 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="similar-job-item">
+                            <h3 class="similar-job-title">
+                                <a href="#">Full Stack Developer (MERN Stack)</a>
+                            </h3>
+                            <div class="similar-job-meta">
+                                <span><i class="fas fa-dollar-sign"></i> $3,000 - $4,000</span>
+                                <span><i class="fas fa-clock"></i> 1 week ago</span>
+                            </div>
+                        </div>
+
+                        <div class="similar-job-item">
+                            <h3 class="similar-job-title">
+                                <a href="#">E-commerce Website Redesign</a>
+                            </h3>
+                            <div class="similar-job-meta">
+                                <span><i class="fas fa-dollar-sign"></i> $2,200 - $3,200</span>
+                                <span><i class="fas fa-clock"></i> 2 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to start working with top talent?</h2>
+                <p>Join thousands of businesses and freelancers who trust our platform for their projects.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-secondary">Post a Job</a>
+                    <a href="#" class="btn btn-outline">Find Work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="/api/placeholder/150/40" alt="Logo">
+                    <p>Connect with skilled professionals for your projects or find your next opportunity. We make
+                        hiring and finding work simple.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>For Clients</h3>
+                    <ul>
+                        <li><a href="#">Find Talent</a></li>
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">How to Hire</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3>For Talent</h3>
+                    <ul>
+                        <li><a href="#">Find Work</a></li>
+                        <li><a href="#">Create Profile</a></li>
+                        <li><a href="#">Skills Tests</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> support@yourplatform.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Market St, San Francisco, CA 94105</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Your Platform Name. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            const authButtons = document.querySelector('.auth-buttons');
+
+            mobileMenuToggle.addEventListener('click', function () {
+                mainNav.style.display = mainNav.style.display === 'block' ? 'none' : 'block';
+                authButtons.style.display = authButtons.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Hirer Dashboard</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            /* Primary Brand Colors */
+            --primary-color: #6A0DAD;
+            /* Purple */
+            --primary-light: #8A2BE2;
+            --primary-dark: #4B0082;
+
+            /* Secondary Colors */
+            --secondary-color: #FFD700;
+            /* Gold */
+            --secondary-light: #FFDF33;
+            --secondary-dark: #E6C200;
+
+            /* Accent Colors */
+            --accent-color: #F5F5F5;
+            /* Platinum White */
+            --dark-color: #212121;
+            /* Charcoal Black for Dark Mode */
+
+            /* Neutral Colors */
+            --text-color: #333333;
+            --text-light: #666666;
+            --border-color: #E0E0E0;
+            --light-bg: #F9F9F9;
+
+            /* Status Colors */
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --info: #17A2B8;
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 3rem;
+
+            /* Border Radius */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 16px;
+
+            /* Box Shadow */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+            /* Font Sizes */
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.5rem;
+            --font-size-xxl: 2rem;
+            --font-size-xxxl: 2.5rem;
+
+            /* Container Width */
+            --container-width: 1200px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #FFFFFF;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-light);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-size: var(--font-size-md);
+            font-weight: 500;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: var(--font-size-sm);
+        }
+
+        /* Dashboard specific styles */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: var(--dark-color);
+            color: white;
+            padding: var(--spacing-lg);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: var(--spacing-sm);
+        }
+
+        .sidebar-header h3 {
+            color: white;
+            margin-bottom: 0;
+            font-size: var(--font-size-md);
+        }
+
+        .sidebar-header p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0;
+            font-size: var(--font-size-xs);
+        }
+
+        .sidebar-menu {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .sidebar-menu h4 {
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .sidebar-menu ul li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .sidebar-menu ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm) 0;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu ul li a i {
+            margin-right: var(--spacing-md);
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu ul li a:hover,
+        .sidebar-menu ul li a.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: var(--spacing-sm);
+        }
+
+        .sidebar-menu ul li a.active {
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .main-content {
+            padding: var(--spacing-lg);
+            background-color: var(--light-bg);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .dashboard-title h1 {
+            margin-bottom: 0;
+        }
+
+        .dashboard-title p {
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .notifications-btn {
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .notifications-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.earning {
+            background-color: rgba(106, 13, 173, 0.1);
+            color: var(--primary-color);
+        }
+
+        .stat-icon.jobs {
+            background-color: rgba(255, 215, 0, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .stat-icon.proposals {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: var(--info);
+        }
+
+        .stat-icon.reviews {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .stat-trend {
+            color: var(--success);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-trend.down {
+            color: var(--danger);
+        }
+
+        .stat-value {
+            font-size: var(--font-size-xxl);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        .active-jobs {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header h2 {
+            margin-bottom: 0;
+            font-size: var(--font-size-xl);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+        }
+
+        .job-item {
+            display: flex;
+            align-items: flex-start;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .job-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius-md);
+            background-color: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+
+        .job-details {
+            flex-grow: 1;
+        }
+
+        .job-item-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .job-client {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            font-size: var(--font-size-sm);
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .job-budget {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .job-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .progress-text {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        .upcoming-deadlines {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .deadline-item:last-child {
+            border-bottom: none;
+        }
+
+        .deadline-date {
+            width: 60px;
+            text-align: center;
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius-sm);
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+
+        .deadline-date.urgent {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        .deadline-date.upcoming {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .deadline-date.future {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: var(--info);
+        }
+
+        .deadline-date .day {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .deadline-date .month {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+        }
+
+        .deadline-info {
+            flex-grow: 1;
+        }
+
+        .deadline-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .deadline-project {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        .freelancer-applications {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .applications-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .application-item {
+            display: flex;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .application-item:last-child {
+            border-bottom: none;
+        }
+
+        .freelancer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .freelancer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .freelancer-status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--success);
+            border: 2px solid white;
+        }
+
+        .application-info {
+            flex-grow: 1;
+        }
+
+        .freelancer-name {
+            font-weight: 600;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .freelancer-rating {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            color: var(--secondary-color);
+            font-size: var(--font-size-xs);
+        }
+
+        .application-job {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .application-proposal {
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-xs);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .application-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .action-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: var(--font-size-xs);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+        }
+
+        .view-btn {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .accept-btn {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .reject-btn {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .message-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .messages-section {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message-item {
+            display: flex;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+            overflow: hidden;
+            background-color: var(--light-bg);
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message-content {
+            flex-grow: 1;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .message-sender {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .message-time {
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+        }
+
+        .message-preview {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .message-unread {
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-left: var(--spacing-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="/api/placeholder/40/40" alt="User Avatar">
+                <div>
+                    <h3>TechTalent Inc.</h3>
+                    <p>Client Account</p>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Main Menu</h4>
+                <ul>
+                    <li><a href="#dashboard" class="active" data-section="dashboard"><i class="fas fa-th-large"></i>
+                            Dashboard</a></li>
+                    <li><a href="#my-jobs" data-section="my-jobs"><i class="fas fa-briefcase"></i> My Jobs</a></li>
+                    <li><a href="#freelancers" data-section="freelancers"><i class="fas fa-user-tie"></i>
+                            Freelancers</a></li>
+                    <li><a href="#contracts" data-section="contracts"><i class="fas fa-file-alt"></i> Contracts</a></li>
+                    <li><a href="#messages" data-section="messages"><i class="fas fa-comment-dots"></i> Messages</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Manage</h4>
+                <ul>
+                    <li><a href="#saved-freelancers" data-section="saved-freelancers"><i class="fas fa-star"></i> Saved
+                            Freelancers</a></li>
+                    <li><a href="#applications" data-section="applications"><i class="fas fa-clipboard-list"></i>
+                            Applications</a></li>
+                    <li><a href="#reports" data-section="reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                    <li><a href="#payments" data-section="payments"><i class="fas fa-wallet"></i> Payments</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="#profile" data-section="profile"><i class="fas fa-user-circle"></i> Profile</a></li>
+                    <li><a href="#settings" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#logout" data-section="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p>Welcome back, TechTalent Inc.</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> Post a Job</button>
+                    <button class="notifications-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notifications-badge">3</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+                <!-- Content will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Content templates
+            const contentTemplates = {
+                'dashboard': `
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon jobs"><i class="fas fa-briefcase"></i></div>
+                                <div class="stat-trend"><i class="fas fa-arrow-up"></i> 12%</div>
+                            </div>
+                            <div class="stat-value">14</div>
+                            <div class="stat-label">Active Jobs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon proposals"><i class="fas fa-file-alt"></i></div>
+                                <div class="stat-trend"><i class="fas fa-arrow-up"></i> 24%</div>
+                            </div>
+                            <div class="stat-value">63</div>
+                            <div class="stat-label">Applications Received</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon earning"><i class="fas fa-user-check"></i></div>
+                                <div class="stat-trend"><i class="fas fa-arrow-up"></i> 8%</div>
+                            </div>
+                            <div class="stat-value">9</div>
+                            <div class="stat-label">Hired Freelancers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon reviews"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="stat-trend down"><i class="fas fa-arrow-down"></i> 5%</div>
+                            </div>
+                            <div class="stat-value">$12.4k</div>
+                            <div class="stat-label">Budget Spent</div>
+                        </div>
+                    </div>
+                    <div class="content-grid">
+                        <div class="left-column">
+                            <div class="active-jobs">
+                                <div class="section-header">
+                                    <h2>Active Jobs</h2>
+                                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="job-item">
+                                    <div class="job-icon"><i class="fas fa-code"></i></div>
+                                    <div class="job-details">
+                                        <div class="job-item-title">
+                                            <span>Full-Stack Developer for E-commerce Platform</span>
+                                            <span class="job-budget">$3,500</span>
+                                        </div>
+                                        <div class="job-client">Posted 2 days ago • 18 applications</div>
+                                        <div class="job-meta">
+                                            <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                            <div class="job-meta-item"><i class="fas fa-clock"></i> 2-3 months</div>
+                                        </div>
+                                        <div class="job-progress">
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                                            <div class="progress-text">75% matched</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="job-item">
+                                    <div class="job-icon"><i class="fas fa-paint-brush"></i></div>
+                                    <div class="job-details">
+                                        <div class="job-item-title">
+                                            <span>UI/UX Designer for Mobile App</span>
+                                            <span class="job-budget">$2,800</span>
+                                        </div>
+                                        <div class="job-client">Posted 5 days ago • 24 applications</div>
+                                        <div class="job-meta">
+                                            <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                            <div class="job-meta-item"><i class="fas fa-clock"></i> 1-2 months</div>
+                                        </div>
+                                        <div class="job-progress">
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                            <div class="progress-text">85% matched</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="freelancer-applications">
+                                <div class="section-header">
+                                    <h2>Recent Applications</h2>
+                                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="applications-list">
+                                    <div class="application-item">
+                                        <div class="freelancer-avatar">
+                                            <img src="/api/placeholder/50/50" alt="Freelancer Avatar">
+                                            <div class="freelancer-status"></div>
+                                        </div>
+                                        <div class="application-info">
+                                            <div class="freelancer-name">
+                                                <span>Sarah Johnson</span>
+                                                <div class="freelancer-rating">
+                                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.7</span>
+                                                </div>
+                                            </div>
+                                            <div class="application-job">Full-Stack Developer for E-commerce Platform</div>
+                                            <div class="application-proposal">I have 5+ years of experience...</div>
+                                            <div class="application-actions">
+                                                <button class="action-btn view-btn">View Profile</button>
+                                                <button class="action-btn message-btn">Message</button>
+                                                <button class="action-btn accept-btn">Hire</button>
+                                                <button class="action-btn reject-btn">Reject</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-column">
+                            <div class="upcoming-deadlines">
+                                <div class="section-header">
+                                    <h2>Upcoming Deadlines</h2>
+                                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="deadline-item">
+                                    <div class="deadline-date urgent">
+                                        <div class="day">15</div>
+                                        <div class="month">Mar</div>
+                                    </div>
+                                    <div class="deadline-info">
+                                        <div class="deadline-title">Website Redesign Mockups</div>
+                                        <div class="deadline-project">by Alex Turner</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="messages-section">
+                                <div class="section-header">
+                                    <h2>Recent Messages</h2>
+                                    <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                                <div class="message-item">
+                                    <div class="message-avatar">
+                                        <img src="/api/placeholder/40/40" alt="Message Avatar">
+                                    </div>
+                                    <div class="message-content">
+                                        <div class="message-header">
+                                            <div class="message-sender">Sarah Johnson <span class="message-unread"></span></div>
+                                            <div class="message-time">10:30 AM</div>
+                                        </div>
+                                        <p class="message-preview">I've just uploaded the initial wireframes...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'my-jobs': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>My Jobs</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-code"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>Full-Stack Developer for E-commerce Platform</span>
+                                    <span class="job-budget">$3,500</span>
+                                </div>
+                                <div class="job-client">Posted 2 days ago • 18 applications</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 2-3 months</div>
+                                </div>
+                                <div class="job-progress">
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                                    <div class="progress-text">75% matched</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-paint-brush"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>UI/UX Designer for Mobile App</span>
+                                    <span class="job-budget">$2,800</span>
+                                </div>
+                                <div class="job-client">Posted 5 days ago • 24 applications</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 1-2 months</div>
+                                </div>
+                                <div class="job-progress">
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                    <div class="progress-text">85% matched</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-file-word"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>Technical Content Writer</span>
+                                    <span class="job-budget">$1,200</span>
+                                </div>
+                                <div class="job-client">Posted 1 week ago • 9 applications</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> Ongoing</div>
+                                </div>
+                                <div class="job-progress">
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                                    <div class="progress-text">60% matched</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'freelancers': `
+                    <div class="freelancer-applications">
+                        <div class="section-header">
+                            <h2>Freelancers</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="applications-list">
+                            <div class="application-item">
+                                <div class="freelancer-avatar">
+                                    <img src="/api/placeholder/50/50" alt="Freelancer Avatar">
+                                    <div class="freelancer-status"></div>
+                                </div>
+                                <div class="application-info">
+                                    <div class="freelancer-name">
+                                        <span>Sarah Johnson</span>
+                                        <div class="freelancer-rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.7</span>
+                                        </div>
+                                    </div>
+                                    <div class="application-job">Full-Stack Developer for E-commerce Platform</div>
+                                    <div class="application-proposal">I have 5+ years of experience in e-commerce development...</div>
+                                    <div class="application-actions">
+                                        <button class="action-btn view-btn">View Profile</button>
+                                        <button class="action-btn message-btn">Message</button>
+                                        <button class="action-btn accept-btn">Hire</button>
+                                        <button class="action-btn reject-btn">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="application-item">
+                                <div class="freelancer-avatar">
+                                    <img src="/api/placeholder/50/50" alt="Freelancer Avatar">
+                                    <div class="freelancer-status"></div>
+                                </div>
+                                <div class="application-info">
+                                    <div class="freelancer-name">
+                                        <span>Michael Chen</span>
+                                        <div class="freelancer-rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><span>5.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="application-job">UI/UX Designer for Mobile App</div>
+                                    <div class="application-proposal">With over 7 years in mobile UI/UX design...</div>
+                                    <div class="application-actions">
+                                        <button class="action-btn view-btn">View Profile</button>
+                                        <button class="action-btn message-btn">Message</button>
+                                        <button class="action-btn accept-btn">Hire</button>
+                                        <button class="action-btn reject-btn">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="application-item">
+                                <div class="freelancer-avatar">
+                                    <img src="/api/placeholder/50/50" alt="Freelancer Avatar">
+                                    <div class="freelancer-status"></div>
+                                </div>
+                                <div class="application-info">
+                                    <div class="freelancer-name">
+                                        <span>Emma Rodriguez</span>
+                                        <div class="freelancer-rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="far fa-star"></i><span>4.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="application-job">Technical Content Writer</div>
+                                    <div class="application-proposal">I'm a technical writer with a background in software...</div>
+                                    <div class="application-actions">
+                                        <button class="action-btn view-btn">View Profile</button>
+                                        <button class="action-btn message-btn">Message</button>
+                                        <button class="action-btn accept-btn">Hire</button>
+                                        <button class="action-btn reject-btn">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'contracts': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Contracts</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>Full-Stack Developer for E-commerce Platform</span>
+                                    <span class="job-budget">$3,500</span>
+                                </div>
+                                <div class="job-client">Freelancer: Sarah Johnson • Started: Mar 1, 2025</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 2-3 months</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>UI/UX Designer for Mobile App</span>
+                                    <span class="job-budget">$2,800</span>
+                                </div>
+                                <div class="job-client">Freelancer: Michael Chen • Started: Mar 5, 2025</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 1-2 months</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'messages': `
+                    <div class="messages-section">
+                        <div class="section-header">
+                            <h2>Messages</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="/api/placeholder/40/40" alt="Message Avatar">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-sender">Sarah Johnson <span class="message-unread"></span></div>
+                                    <div class="message-time">10:30 AM</div>
+                                </div>
+                                <p class="message-preview">I've just uploaded the initial wireframes for the e-commerce project...</p>
+                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="/api/placeholder/40/40" alt="Message Avatar">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-sender">Michael Chen <span class="message-unread"></span></div>
+                                    <div class="message-time">Yesterday</div>
+                                </div>
+                                <p class="message-preview">Thank you for the feedback. I'll implement those changes...</p>
+                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="/api/placeholder/40/40" alt="Message Avatar">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-sender">Emma Rodriguez</div>
+                                    <div class="message-time">Mar 8</div>
+                                </div>
+                                <p class="message-preview">I've completed the first draft of the technical documentation...</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'saved-freelancers': `
+                    <div class="freelancer-applications">
+                        <div class="section-header">
+                            <h2>Saved Freelancers</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="applications-list">
+                            <div class="application-item">
+                                <div class="freelancer-avatar">
+                                    <img src="/api/placeholder/50/50" alt="Freelancer Avatar">
+                                    <div class="freelancer-status"></div>
+                                </div>
+                                <div class="application-info">
+                                    <div class="freelancer-name">
+                                        <span>Sarah Johnson</span>
+                                        <div class="freelancer-rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.7</span>
+                                        </div>
+                                    </div>
+                                    <div class="application-job">Full-Stack Developer</div>
+                                    <div class="application-proposal">Specializes in e-commerce development...</div>
+                                    <div class="application-actions">
+                                        <button class="action-btn view-btn">View Profile</button>
+                                        <button class="action-btn message-btn">Message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'applications': `
+                    <div class="freelancer-applications">
+                        <div class="section-header">
+                            <h2>All Applications</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="applications-list">
+                            <div class="application-item">
+                                <div class="freelancer-avatar">
+                                    <img src="/api/placeholder/50/50" alt="Freelancer Avatar">
+                                    <div class="freelancer-status"></div>
+                                </div>
+                                <div class="application-info">
+                                    <div class="freelancer-name">
+                                        <span>Sarah Johnson</span>
+                                        <div class="freelancer-rating">
+                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><span>4.7</span>
+                                        </div>
+                                    </div>
+                                    <div class="application-job">Full-Stack Developer for E-commerce Platform</div>
+                                    <div class="application-proposal">I have 5+ years of experience...</div>
+                                    <div class="application-actions">
+                                        <button class="action-btn view-btn">View Profile</button>
+                                        <button class="action-btn message-btn">Message</button>
+                                        <button class="action-btn accept-btn">Hire</button>
+                                        <button class="action-btn reject-btn">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'reports': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Reports</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <p>Generate and view detailed reports here. (Placeholder content)</p>
+                    </div>
+                `,
+                'payments': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Payments</h2>
+                            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <p>Manage payment history and transactions here. (Placeholder content)</p>
+                    </div>
+                `,
+                'profile': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Profile</h2>
+                        </div>
+                        <p>Update your company profile here. (Placeholder content)</p>
+                    </div>
+                `,
+                'settings': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Settings</h2>
+                        </div>
+                        <p>Adjust account settings here. (Placeholder content)</p>
+                    </div>
+                `,
+                'logout': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Logout</h2>
+                        </div>
+                        <p>Are you sure you want to logout? (Placeholder content)</p>
+                        <button class="btn btn-primary">Confirm Logout</button>
+                    </div>
+                `
+            };
+
+            // Sidebar link click handler
+            $('.sidebar-menu a').on('click', function (e) {
+                e.preventDefault();
+
+                // Remove active class from all links and add to clicked link
+                $('.sidebar-menu a').removeClass('active');
+                $(this).addClass('active');
+
+                // Get the section to display
+                const section = $(this).data('section');
+
+                // Update page title
+                $('#page-title').text($(this).text().trim());
+
+                // Update dynamic content
+                $('#dynamic-content').html(contentTemplates[section] || '<p>Section under development.</p>');
+            });
+
+            // Initial load: trigger click on active link (Dashboard)
+            $('.sidebar-menu a.active').trigger('click');
+
+            // Notifications button
+            $('.notifications-btn').on('click', function () {
+                alert('Notifications feature coming soon!');
+            });
+
+            // Job action buttons (delegated event handler for dynamic content)
+            $(document).on('click', '.action-btn', function () {
+                const action = $(this).text().trim();
+                const freelancer = $(this).closest('.application-info').find('.freelancer-name span').text();
+
+                if (action === 'Hire') {
+                    alert(`You are about to hire ${freelancer}. This will generate a contract.`);
+                } else if (action === 'Reject') {
+                    alert(`You are about to reject ${freelancer}'s application.`);
+                }
+            });
+
+            // Toggle sidebar on mobile (if you add a mobile toggle button later)
+            $('.mobile-menu-toggle').on('click', function () {
+                $('.sidebar').toggleClass('show');
+            });
+        });
+    </script>
+</body>
+
+</html>

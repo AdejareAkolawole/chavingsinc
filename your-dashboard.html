@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Dashboard | WorkConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Importing the main styles */
+        @import url('main.css');
+
+        /* Dashboard specific styles */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: var(--dark-color);
+            color: white;
+            padding: var(--spacing-lg);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: var(--spacing-sm);
+        }
+
+        .sidebar-header h3 {
+            color: white;
+            margin-bottom: 0;
+            font-size: var(--font-size-md);
+        }
+
+        .sidebar-header p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0;
+            font-size: var(--font-size-xs);
+        }
+
+        .sidebar-menu {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .sidebar-menu h4 {
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            font-size: var(--font-size-xs);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .sidebar-menu ul li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .sidebar-menu ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm) 0;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu ul li a i {
+            margin-right: var(--spacing-md);
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-menu ul li a:hover,
+        .sidebar-menu ul li a.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: var(--spacing-sm);
+        }
+
+        .sidebar-menu ul li a.active {
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .main-content {
+            padding: var(--spacing-lg);
+            background-color: var(--light-bg);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .dashboard-title h1 {
+            margin-bottom: 0;
+        }
+
+        .dashboard-title p {
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .notifications-btn {
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .notifications-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.earning {
+            background-color: rgba(106, 13, 173, 0.1);
+            color: var(--primary-color);
+        }
+
+        .stat-icon.jobs {
+            background-color: rgba(255, 215, 0, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .stat-icon.proposals {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: var(--info);
+        }
+
+        .stat-icon.reviews {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .stat-trend {
+            color: var(--success);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-trend.down {
+            color: var(--danger);
+        }
+
+        .stat-value {
+            font-size: var(--font-size-xxl);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        .active-jobs {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header h2 {
+            margin-bottom: 0;
+            font-size: var(--font-size-xl);
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+        }
+
+        .job-item {
+            display: flex;
+            align-items: flex-start;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .job-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius-md);
+            background-color: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+
+        .job-details {
+            flex-grow: 1;
+        }
+
+        .job-item-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .job-client {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            font-size: var(--font-size-sm);
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .job-budget {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .job-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .progress-text {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        .upcoming-deadlines {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .deadline-item:last-child {
+            border-bottom: none;
+        }
+
+        .deadline-date {
+            width: 60px;
+            text-align: center;
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius-sm);
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+        }
+
+        .deadline-date.urgent {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        .deadline-date.upcoming {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .deadline-date.future {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: var(--info);
+        }
+
+        .deadline-date .day {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .deadline-date .month {
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+        }
+
+        .deadline-info {
+            flex-grow: 1;
+        }
+
+        .deadline-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .deadline-project {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        .proposals-section {
+            margin-top: var(--spacing-lg);
+        }
+
+        .proposal-card {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .proposal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .proposal-card .status {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+
+        .proposal-card .status.pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .proposal-card .status.accepted {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+
+        .proposal-card .status.rejected {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+
+        .proposal-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            padding-right: 80px;
+        }
+
+        .proposal-client {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .proposal-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .proposal-detail {
+            text-align: center;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+        }
+
+        .messages-section {
+            background-color: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            margin-top: var(--spacing-lg);
+        }
+
+        .message-item {
+            display: flex;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .message-item:last-child {
+            border-bottom: none;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: var(--spacing-md);
+            flex-shrink: 0;
+            overflow: hidden;
+            background-color: var(--light-bg);
+        }
+
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message-content {
+            flex-grow: 1;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .message-sender {
+            font-weight: 600;
+        }
+
+        .message-time {
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+        }
+
+        .message-preview {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .message-unread {
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-left: var(--spacing-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/api/placeholder/40/40" alt="User Avatar">
+                <div>
+                    <h3>John Doe</h3>
+                    <p>Web Developer</p>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Main</h4>
+                <ul>
+                    <li><a href="#dashboard" class="active" data-section="dashboard"><i class="fas fa-home"></i>
+                            Dashboard</a></li>
+                    <li><a href="#my-jobs" data-section="my-jobs"><i class="fas fa-briefcase"></i> My Jobs</a></li>
+                    <li><a href="#proposals" data-section="proposals"><i class="fas fa-file-alt"></i> Proposals</a></li>
+                    <li><a href="#messages" data-section="messages"><i class="fas fa-envelope"></i> Messages</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Account</h4>
+                <ul>
+                    <li><a href="#profile" data-section="profile"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#finances" data-section="finances"><i class="fas fa-wallet"></i> Finances</a></li>
+                    <li><a href="#statistics" data-section="statistics"><i class="fas fa-chart-line"></i> Statistics</a>
+                    </li>
+                    <li><a href="#settings" data-section="settings"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#help-center" data-section="help-center"><i class="fas fa-question-circle"></i> Help
+                            Center</a></li>
+                    <li><a href="#support" data-section="support"><i class="fas fa-life-ring"></i> Support</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1 id="page-title">Dashboard</h1>
+                    <p>Welcome back, John! Here's what's happening today.</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="notifications-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notifications-badge">3</span>
+                    </button>
+                    <a href="#" class="btn btn-primary">+ New Proposal</a>
+                </div>
+            </div>
+
+            <div id="dynamic-content">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Content templates
+            const contentTemplates = {
+                'dashboard': `
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon earning"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="stat-trend"><i class="fas fa-arrow-up"></i> 12%</div>
+                            </div>
+                            <div class="stat-value">$8,250</div>
+                            <div class="stat-label">Earnings this month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon jobs"><i class="fas fa-briefcase"></i></div>
+                                <div class="stat-trend"><i class="fas fa-arrow-up"></i> 8%</div>
+                            </div>
+                            <div class="stat-value">6</div>
+                            <div class="stat-label">Active Jobs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon proposals"><i class="fas fa-file-alt"></i></div>
+                                <div class="stat-trend down"><i class="fas fa-arrow-down"></i> 5%</div>
+                            </div>
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Pending Proposals</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div class="stat-icon reviews"><i class="fas fa-star"></i></div>
+                                <div class="stat-trend"><i class="fas fa-equals"></i> 0%</div>
+                            </div>
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                    </div>
+                    <div class="content-grid">
+                        <div class="content-left">
+                            <div class="active-jobs">
+                                <div class="section-header">
+                                    <h2>Active Jobs</h2>
+                                    <a href="#" class="view-all">View All</a>
+                                </div>
+                                <div class="job-item">
+                                    <div class="job-icon"><i class="fas fa-code"></i></div>
+                                    <div class="job-details">
+                                        <div class="job-item-title">
+                                            <span>E-commerce Website Redesign</span>
+                                            <span class="job-budget">$2,500</span>
+                                        </div>
+                                        <div class="job-client"><i class="fas fa-building"></i> TechSolutions Inc.</div>
+                                        <div class="job-meta">
+                                            <div class="job-meta-item"><i class="fas fa-calendar"></i> Due: Mar 25, 2025</div>
+                                            <div class="job-meta-item"><i class="fas fa-clock"></i> 45 hours spent</div>
+                                        </div>
+                                        <div class="job-progress">
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                                            <div class="progress-text">75%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="job-item">
+                                    <div class="job-icon"><i class="fas fa-paint-brush"></i></div>
+                                    <div class="job-details">
+                                        <div class="job-item-title">
+                                            <span>Mobile App UI Design</span>
+                                            <span class="job-budget">$1,800</span>
+                                        </div>
+                                        <div class="job-client"><i class="fas fa-user"></i> Sarah Johnson</div>
+                                        <div class="job-meta">
+                                            <div class="job-meta-item"><i class="fas fa-calendar"></i> Due: Mar 18, 2025</div>
+                                            <div class="job-meta-item"><i class="fas fa-clock"></i> 20 hours spent</div>
+                                        </div>
+                                        <div class="job-progress">
+                                            <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                                            <div class="progress-text">40%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="proposals-section">
+                                <div class="section-header">
+                                    <h2>Recent Proposals</h2>
+                                    <a href="#" class="view-all">View All</a>
+                                </div>
+                                <div class="proposal-card">
+                                    <div class="status accepted">Accepted</div>
+                                    <h3 class="proposal-title">Website Development for Restaurant Chain</h3>
+                                    <div class="proposal-client"><i class="fas fa-building"></i> Taste of Italy</div>
+                                    <div class="proposal-details">
+                                        <div class="proposal-detail">
+                                            <p class="detail-value">$3,200</p>
+                                            <p class="detail-label">Budget</p>
+                                        </div>
+                                        <div class="proposal-detail">
+                                            <p class="detail-value">4 weeks</p>
+                                            <p class="detail-label">Duration</p>
+                                        </div>
+                                        <div class="proposal-detail">
+                                            <p class="detail-value">Mar 5, 2025</p>
+                                            <p class="detail-label">Submitted</p>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-right">
+                            <div class="upcoming-deadlines">
+                                <div class="section-header">
+                                    <h2>Upcoming Deadlines</h2>
+                                    <a href="#" class="view-all">View All</a>
+                                </div>
+                                <div class="deadline-item">
+                                    <div class="deadline-date urgent">
+                                        <div class="day">12</div>
+                                        <div class="month">Mar</div>
+                                    </div>
+                                    <div class="deadline-info">
+                                        <div class="deadline-title">UI Design Delivery</div>
+                                        <div class="deadline-project">Mobile App UI Design</div>
+                                    </div>
+                                </div>
+                                <div class="deadline-item">
+                                    <div class="deadline-date upcoming">
+                                        <div class="day">18</div>
+                                        <div class="month">Mar</div>
+                                    </div>
+                                    <div class="deadline-info">
+                                        <div class="deadline-title">Final Delivery</div>
+                                        <div class="deadline-project">Mobile App UI Design</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="messages-section">
+                                <div class="section-header">
+                                    <h2>Recent Messages</h2>
+                                    <a href="#" class="view-all">View All</a>
+                                </div>
+                                <div class="message-item">
+                                    <div class="message-avatar">
+                                        <img src="/api/placeholder/40/40" alt="Sarah Johnson">
+                                    </div>
+                                    <div class="message-content">
+                                        <div class="message-header">
+                                            <span class="message-sender">Sarah Johnson <span class="message-unread"></span></span>
+                                            <span class="message-time">10:32 AM</span>
+                                        </div>
+                                        <p class="message-preview">Hey John, I've reviewed the designs...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'my-jobs': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>My Jobs</h2>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-code"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>E-commerce Website Redesign</span>
+                                    <span class="job-budget">$2,500</span>
+                                </div>
+                                <div class="job-client"><i class="fas fa-building"></i> TechSolutions Inc.</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-calendar"></i> Due: Mar 25, 2025</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 45 hours spent</div>
+                                </div>
+                                <div class="job-progress">
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                                    <div class="progress-text">75%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-paint-brush"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>Mobile App UI Design</span>
+                                    <span class="job-budget">$1,800</span>
+                                </div>
+                                <div class="job-client"><i class="fas fa-user"></i> Sarah Johnson</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-calendar"></i> Due: Mar 18, 2025</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 20 hours spent</div>
+                                </div>
+                                <div class="job-progress">
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                                    <div class="progress-text">40%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-item">
+                            <div class="job-icon"><i class="fas fa-laptop-code"></i></div>
+                            <div class="job-details">
+                                <div class="job-item-title">
+                                    <span>WordPress Plugin Development</span>
+                                    <span class="job-budget">$950</span>
+                                </div>
+                                <div class="job-client"><i class="fas fa-building"></i> Green Marketing</div>
+                                <div class="job-meta">
+                                    <div class="job-meta-item"><i class="fas fa-calendar"></i> Due: Apr 2, 2025</div>
+                                    <div class="job-meta-item"><i class="fas fa-clock"></i> 8 hours spent</div>
+                                </div>
+                                <div class="job-progress">
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 25%;"></div></div>
+                                    <div class="progress-text">25%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'proposals': `
+                    <div class="proposals-section">
+                        <div class="section-header">
+                            <h2>Proposals</h2>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="proposal-card">
+                            <div class="status accepted">Accepted</div>
+                            <h3 class="proposal-title">Website Development for Restaurant Chain</h3>
+                            <div class="proposal-client"><i class="fas fa-building"></i> Taste of Italy</div>
+                            <div class="proposal-details">
+                                <div class="proposal-detail">
+                                    <p class="detail-value">$3,200</p>
+                                    <p class="detail-label">Budget</p>
+                                </div>
+                                <div class="proposal-detail">
+                                    <p class="detail-value">4 weeks</p>
+                                    <p class="detail-label">Duration</p>
+                                </div>
+                                <div class="proposal-detail">
+                                    <p class="detail-value">Mar 5, 2025</p>
+                                    <p class="detail-label">Submitted</p>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                        </div>
+                        <div class="proposal-card">
+                            <div class="status pending">Pending</div>
+                            <h3 class="proposal-title">Logo Design for Tech Startup</h3>
+                            <div class="proposal-client"><i class="fas fa-building"></i> NextGen Solutions</div>
+                            <div class="proposal-details">
+                                <div class="proposal-detail">
+                                    <p class="detail-value">$750</p>
+                                    <p class="detail-label">Budget</p>
+                                </div>
+                                <div class="proposal-detail">
+                                    <p class="detail-value">1 week</p>
+                                    <p class="detail-label">Duration</p>
+                                </div>
+                                <div class="proposal-detail">
+                                    <p class="detail-value">Mar 8, 2025</p>
+                                    <p class="detail-label">Submitted</p>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline">View Details</a>
+                        </div>
+                    </div>
+                `,
+                'messages': `
+                    <div class="messages-section">
+                        <div class="section-header">
+                            <h2>Messages</h2>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="/api/placeholder/40/40" alt="Sarah Johnson">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">Sarah Johnson <span class="message-unread"></span></span>
+                                    <span class="message-time">10:32 AM</span>
+                                </div>
+                                <p class="message-preview">Hey John, I've reviewed the designs you sent. Can we schedule a call to discuss...</p>
+                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <img src="/api/placeholder/40/40" alt="Mike Williams">
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-sender">Mike Williams</span>
+                                    <span class="message-time">Yesterday</span>
+                                </div>
+                                <p class="message-preview">The initial draft is ready for review. Let me know your feedback!</p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                'profile': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Profile</h2>
+                        </div>
+                        <p>Update your profile details here. (Placeholder content)</p>
+                    </div>
+                `,
+                'finances': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Finances</h2>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <p>View your earnings and payment history here. (Placeholder content)</p>
+                    </div>
+                `,
+                'statistics': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Statistics</h2>
+                        </div>
+                        <p>View your performance statistics here. (Placeholder content)</p>
+                    </div>
+                `,
+                'settings': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Settings</h2>
+                        </div>
+                        <p>Adjust your account settings here. (Placeholder content)</p>
+                    </div>
+                `,
+                'help-center': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Help Center</h2>
+                        </div>
+                        <p>Find answers to common questions here. (Placeholder content)</p>
+                    </div>
+                `,
+                'support': `
+                    <div class="active-jobs">
+                        <div class="section-header">
+                            <h2>Support</h2>
+                        </div>
+                        <p>Contact support for assistance here. (Placeholder content)</p>
+                    </div>
+                `
+            };
+
+            // Sidebar link click handler
+            $('.sidebar-menu a').on('click', function (e) {
+                e.preventDefault();
+
+                // Remove active class from all links and add to clicked link
+                $('.sidebar-menu a').removeClass('active');
+                $(this).addClass('active');
+
+                // Get the section to display
+                const section = $(this).data('section');
+
+                // Update page title
+                $('#page-title').text($(this).text().trim());
+
+                // Update dynamic content
+                $('#dynamic-content').html(contentTemplates[section] || '<p>Section under development.</p>');
+            });
+
+            // Initial load: trigger click on active link (Dashboard)
+            $('.sidebar-menu a.active').trigger('click');
+
+            // Notifications button
+            $('.notifications-btn').on('click', function () {
+                alert('Notifications feature coming soon!');
+            });
+
+            // View details button handler (delegated for dynamic content)
+            $(document).on('click', '.btn-sm', function (e) {
+                e.preventDefault();
+                const proposalTitle = $(this).closest('.proposal-card').find('.proposal-title').text();
+                if (proposalTitle) {
+                    alert(`Viewing details for: ${proposalTitle}`);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

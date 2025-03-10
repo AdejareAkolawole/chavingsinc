@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Post and search jobs easily with WorkConnect">
+    <title>Job Posting & Search | WorkConnect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"rel="stylesheet">
+    <link rel="stylesheet" href="job-search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="#"><strong>Work</strong>Connect</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Find Work</a></li>
+                    <li><a href="#" class="active">Find Jobs</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline">Sign In</a>
+                <a href="#" class="btn btn-primary">Join Now</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Job Posting & Search</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <span class="separator">/</span>
+                <a href="#">Jobs</a>
+                <span class="separator">/</span>
+                <span>Post & Search</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-content">
+        <div class="container">
+            <div class="tabs">
+                <div class="tab active" id="searchTabToggle" onclick="switchTab('searchJobsTab')">
+                    <i class="fas fa-search"></i> Search Jobs
+                </div>
+                <div class="tab" id="postTabToggle" onclick="switchTab('postJobTab')">
+                    <i class="fas fa-plus-circle"></i> Post a Job
+                </div>
+            </div>
+
+            <div id="postJobTab" class="sidebar-widget">
+                <form id="jobPostForm">
+                    <div class="form-group">
+                        <label for="jobTitle" class="form-label">Job Title <span class="required">*</span></label>
+                        <input type="text" id="jobTitle" class="form-control" placeholder="e.g. Senior Web Developer"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobCategory" class="form-label">Category <span class="required">*</span></label>
+                        <select id="jobCategory" class="form-select" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="web-development">Web Development</option>
+                            <option value="mobile-app">Mobile App Development</option>
+                            <option value="design">Graphic & UI/UX Design</option>
+                            <option value="marketing">Digital Marketing</option>
+                            <option value="writing">Content Writing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobBudget" class="form-label">Budget <span class="required">*</span></label>
+                        <div style="display: flex; gap: var(--spacing-md); align-items: center;">
+                            <select id="budgetType" class="form-select" style="flex: 1;">
+                                <option value="fixed">Fixed Price</option>
+                                <option value="hourly">Hourly Rate</option>
+                            </select>
+                            <input type="number" id="jobBudget" class="form-control" placeholder="Enter amount" min="1"
+                                required style="flex: 2;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobDescription" class="form-label">Description <span
+                                class="required">*</span></label>
+                        <textarea id="jobDescription" class="form-control"
+                            placeholder="Describe the job requirements and expectations..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div style="display: flex; gap: var(--spacing-md);">
+                            <button type="submit" class="btn btn-primary">Post Job</button>
+                            <button type="button" class="btn btn-outline">Save Draft</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="searchJobsTab" class="active">
+                <div class="page-layout">
+                    <aside class="sidebar">
+                        <div class="sidebar-widget">
+                            <div class="filter-header">
+                                <h3>Filters</h3>
+                                <span class="filter-toggle" onclick="clearFilters()">Clear All</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="categoryFilter">
+                                    <option value="">All Categories</option>
+                                    <option value="web-development">Web Development</option>
+                                    <option value="mobile-app">Mobile App Development</option>
+                                    <option value="design">Graphic & UI/UX Design</option>
+                                    <option value="marketing">Digital Marketing</option>
+                                    <option value="writing">Content Writing</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Location</label>
+                                <div class="filter-options">
+                                    <div class="form-check">
+                                        <input type="checkbox" id="remoteLocation" class="form-check-input" checked>
+                                        <label for="remoteLocation">Remote</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="onsiteLocation" class="form-check-input">
+                                        <label for="onsiteLocation">On-site</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="hybridLocation" class="form-check-input">
+                                        <label for="hybridLocation">Hybrid</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Budget Range</label>
+                                <div style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-md);">
+                                    <input type="number" id="minBudget" class="form-control" placeholder="Min $">
+                                    <span>-</span>
+                                    <input type="number" id="maxBudget" class="form-control" placeholder="Max $">
+                                </div>
+                                <input type="range" min="0" max="10000" value="5000" class="range-slider"
+                                    id="budgetSlider">
+                                <div class="range-values">
+                                    <span>$0</span>
+                                    <span>$10,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <main class="jobs-container">
+                        <div class="results-info">
+                            <div class="results-count">Showing <span>4</span> jobs</div>
+                            <div class="results-sorting">
+                                <label for="sortBy">Sort by:</label>
+                                <select id="sortBy" class="form-select">
+                                    <option value="recent">Most Recent</option>
+                                    <option value="budget-high">Budget: High to Low</option>
+                                    <option value="budget-low">Budget: Low to High</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-header">
+                                <span class="job-category">Web Development</span>
+                                <span class="job-budget">$3,500 - $5,000</span>
+                            </div>
+                            <h3 class="job-title">Senior Web Developer</h3>
+                            <p class="job-description">Seeking an experienced developer proficient in React and Node.js
+                                for innovative web projects.</p>
+                            <div class="job-meta">
+                                <div class="job-location"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                <div class="job-time"><i class="fas fa-clock"></i> 1-3 months</div>
+                            </div>
+                            <div class="job-footer">
+                                <div class="job-posted">Posted 2 days ago</div>
+                                <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                            </div>
+                        </div>
+
+                        <div class="job-card">
+                            <div class="job-header">
+                                <span class="job-category">Design</span>
+                                <span class="job-budget">$2,800</span>
+                            </div>
+                            <h3 class="job-title">UX/UI Designer</h3>
+                            <p class="job-description">Creative designer needed for responsive web and mobile interfaces
+                                using Figma.</p>
+                            <div class="job-meta">
+                                <div class="job-location"><i class="fas fa-map-marker-alt"></i> Hybrid</div>
+                                <div class="job-time"><i class="fas fa-clock"></i>
+                                    <1 month</div>
+                                </div>
+                                <div class="job-footer">
+                                    <div class="job-posted">Posted 3 days ago</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                                </div>
+                            </div>
+
+                            <div class="job-card">
+                                <div class="job-header">
+                                    <span class="job-category">Mobile Dev</span>
+                                    <span class="job-budget">$50-70/hr</span>
+                                </div>
+                                <h3 class="job-title">Mobile App Developer</h3>
+                                <p class="job-description">React Native expert for a fitness app with health data
+                                    integration.</p>
+                                <div class="job-meta">
+                                    <div class="job-location"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-time"><i class="fas fa-clock"></i> 3-6 months</div>
+                                </div>
+                                <div class="job-footer">
+                                    <div class="job-posted">Posted 1 day ago</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                                </div>
+                            </div>
+
+                            <div class="job-card">
+                                <div class="job-header">
+                                    <span class="job-category">Writing</span>
+                                    <span class="job-budget">$1,200</span>
+                                </div>
+                                <h3 class="job-title">Content Writer</h3>
+                                <p class="job-description">Tech-savvy writer for engaging blog posts and social media
+                                    content.</p>
+                                <div class="job-meta">
+                                    <div class="job-location"><i class="fas fa-map-marker-alt"></i> Remote</div>
+                                    <div class="job-time"><i class="fas fa-clock"></i>
+                                        <1 month</div>
+                                    </div>
+                                    <div class="job-footer">
+                                        <div class="job-posted">Posted 5 days ago</div>
+                                        <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+                                    </div>
+                                </div>
+
+                                <div class="pagination">
+                                    <div class="pagination-item"><i class="fas fa-chevron-left"></i></div>
+                                    <div class="pagination-item active">1</div>
+                                    <div class="pagination-item">2</div>
+                                    <div class="pagination-item">3</div>
+                                    <div class="pagination-item">4</div>
+                                    <div class="pagination-item">5</div>
+                                    <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="job-search.js"></script>
+</body>
+
+</html>
