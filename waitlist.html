@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist - Chavings Tasker</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .waitlist-section {
+            padding: var(--spacing-xxl) 0;
+            background: linear-gradient(rgba(106, 13, 173, 0.9), rgba(106, 13, 173, 0.9)), url('../assets/images/waitlist-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .waitlist-card {
+            background-color: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-xl);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .waitlist-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .waitlist-header h1 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .waitlist-form .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .waitlist-form label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 500;
+        }
+
+        .waitlist-form input,
+        .waitlist-form select,
+        .waitlist-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .waitlist-form input:focus,
+        .waitlist-form select:focus,
+        .waitlist-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(106, 13, 173, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-check input {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+
+        .waitlist-benefits {
+            margin-top: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .waitlist-benefits h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .benefits-list {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+        }
+
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            background-color: var(--primary-light);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.25rem;
+        }
+
+        .waitlist-counter {
+            background-color: var(--primary-light);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .counter-number {
+            font-size: var(--font-size-xxl);
+            font-weight: 700;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+
+        .success-message .success-icon {
+            color: var(--success);
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+
+            .benefits-list {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .benefit-item {
+                flex-direction: row;
+                text-align: left;
+                gap: var(--spacing-sm);
+            }
+
+            .benefit-icon {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="chaving logopurplr.png" alt="Chavings Logo">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="job-search.html">Find Jobs</a></li>
+                    <li><a href="workers.html">Find Workers</a></li>
+                    <li><a href="#how-it-works">How it Works</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="Get-started.html" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="waitlist-section">
+            <div class="container">
+                <div class="waitlist-card">
+                    <div class="waitlist-header">
+                        <h1>Join the Chavings Tasker Waitlist</h1>
+                        <p>Be among the first to access our platform when we launch in your area.</p>
+                    </div>
+
+                    <div class="waitlist-counter">
+                        <div class="counter-number">1,243</div>
+                        <p>People already on the waitlist</p>
+                    </div>
+
+                    <form id="waitlist-form" class="waitlist-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" name="first-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" name="last-name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location (City, State)</label>
+                            <input type="text" id="location" name="location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user-type">I'm interested in:</label>
+                            <select id="user-type" name="user-type" required>
+                                <option value="">Select an option</option>
+                                <option value="hiring">Hiring workers</option>
+                                <option value="working">Working as a freelancer</option>
+                                <option value="both">Both hiring and working</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Skills/Services (If applicable)</label>
+                            <input type="text" id="skills" name="skills"
+                                placeholder="e.g., Plumbing, Electrical, Cleaning">
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">I agree to the <a href="terms.html">Terms of Service</a> and <a
+                                    href="privacy.html">Privacy Policy</a></label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">I want to receive updates, news, and promotional offers</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Join the Waitlist</button>
+                    </form>
+
+                    <div id="success-message" class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>Thank You for Joining!</h2>
+                        <p>You've been added to our waitlist. We'll notify you when Chavings Tasker launches in your
+                            area.</p>
+                        <p>Your position on the waitlist: <strong>#1,244</strong></p>
+                        <div style="margin-top: var(--spacing-lg);">
+                            <a href="index.html" class="btn btn-outline">Back to Home</a>
+                        </div>
+                    </div>
+
+                    <div class="waitlist-benefits">
+                        <h3>Waitlist Benefits</h3>
+                        <p>Join our waitlist today and enjoy these exclusive benefits:</p>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <h4>Early Access</h4>
+                                    <p>Be the first to use our platform</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div>
+                                    <h4>Special Discount</h4>
+                                    <p>Get 20% off your first service</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div>
+                                    <h4>Priority Matching</h4>
+                                    <p>Get matched with top providers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="chaving logopurplr.png" alt="Chavings Logo">
+                    <p>Connecting skilled workers with everyday needs across Nigeria.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="jobs.html">Find Jobs</a></li>
+                        <li><a href="workers.html">Find Workers</a></li>
+                        <li><a href="how-it-works.html">How it Works</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>For Workers</h3>
+                    <ul>
+                        <li><a href="become-worker.html">Become a Worker</a></li>
+                        <li><a href="worker-safety.html">Safety Guidelines</a></li>
+                        <li><a href="worker-faq.html">Worker FAQ</a></li>
+                        <li><a href="worker-resources.html">Resources</a></li>
+                        <li><a href="worker-success.html">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>For Clients</h3>
+                    <ul>
+                        <li><a href="post-job.html">Post a Job</a></li>
+                        <li><a href="hiring-guide.html">Hiring Guide</a></li>
+                        <li><a href="payment-info.html">Payment Information</a></li>
+                        <li><a href="client-faq.html">Client FAQ</a></li>
+                        <li><a href="client-support.html">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Adeola Odeku Street, Victoria Island, Lagos</p>
+                    <p><i class="fas fa-phone"></i> +234 800 CHAVINGS</p>
+                    <p><i class="fas fa-envelope"></i> support@chavingstasker.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Chavings. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

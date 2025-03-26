@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chavings Tasker- Find Local Services & Jobs</title>
+    <title>Chavings Tasker - Hire Skilled Workers in Lagos</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="components.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <header class="main-header">
         <div class="container">
@@ -20,14 +16,23 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="jobs.html">Find Jobs</a></li>
-                    <li><a href="workers.html">Find Workers</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Chavings Pro <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">For Clients</a></li>
+                            <li><a href="#">For Workers</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li class="language-selector">
+                        <a href="#"><i class="fas fa-globe"></i> English</a>
+                    </li>
+                    <li><a href="become-worker.html">Become a Worker</a></li>
+                    <li><a href="login.html">Log In</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="Get-started.html" class="btn btn-primary">Get Started</a>
+                <a href="Get-started.html" class="btn btn-join">Join Now</a>
             </div>
             <div class="mobile-menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -36,373 +41,227 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero-section">
-            <div class="container">
+            <div class="hero-video-container">
+                <video class="hero-video" autoplay loop muted playsinline>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h1>Find Skilled Workers for Any Task in Nigeria</h1>
-                    <p>Connect with verified professionals for your everyday needs</p>
-
-                    <div class="search-container">
-                        <div class="search-tabs">
-                            <button class="tab active" data-tab="find-worker">Find a Worker</button>
-                            <button class="tab" data-tab="find-job">Find a Job</button>
+                    <h1>Our experts will get it done for you</h1>
+                    <form class="search-box">
+                        <div class="search-group">
+                            <input type="text" placeholder="Search for any service...">
+                            <button type="submit" class="btn btn-search"><i class="fas fa-search"></i></button>
                         </div>
-                        <div class="search-box">
-                            <div class="search-group">
-                                <i class="fas fa-search"></i>
-                                <input type="text" placeholder="What service do you need?">
-                            </div>
-                            <div class="search-group">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <input type="text" placeholder="Location">
-                            </div>
-                            <button class="btn btn-search">Search</button>
-                        </div>
+                    </form>
+                    <div class="suggestions">
+                        <a href="category-home-repairs.html" class="suggestion-link">home repairs <i class="fas fa-arrow-right"></i></a>
+                        <a href="category-cleaning.html" class="suggestion-link">cleaning <i class="fas fa-arrow-right"></i></a>
+                        <a href="category-delivery.html" class="suggestion-link">delivery <i class="fas fa-arrow-right"></i></a>
+                        <a href="category-tech-services.html" class="suggestion-link">tech services <i class="fas fa-arrow-right"></i></a>
                     </div>
-
-                    <div class="hero-cta">
-                        <a href="post-job.html" class="btn btn-primary">Post a Job</a>
-                        <a href="become-worker.html" class="btn btn-secondary">Become a Worker</a>
+                </div>
+                <div class="trusted-by">
+                    <h3>Trusted by:</h3>
+                    <div class="trusted-logos">
+                        <span>Meta</span>
+                        <span>Google</span>
+                        <span>Netflix</span>
+                        <span>P&G</span>
+                        <span>PayPal</span>
+                        <span>Payoneer</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Categories Section -->
         <section class="categories-section">
             <div class="container">
-                <h2 class="section-title">Popular Categories</h2>
+                <h2 class="section-title">Explore Top Categories</h2>
                 <div class="categories-grid">
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-hammer"></i>
-                        </div>
+                    <a href="category-home-repairs.html" class="category-card">
+                        <div class="category-icon"><i class="fas fa-hammer"></i></div>
                         <h3>Home Repairs</h3>
-                        <p>450+ Workers</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-broom"></i>
-                        </div>
+                        <p>450+ Experts Available</p>
+                    </a>
+                    <a href="category-cleaning.html" class="category-card">
+                        <div class="category-icon"><i class="fas fa-broom"></i></div>
                         <h3>Cleaning</h3>
-                        <p>320+ Workers</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
+                        <p>320+ Experts Available</p>
+                    </a>
+                    <a href="category-delivery.html" class="category-card">
+                        <div class="category-icon"><i class="fas fa-truck"></i></div>
                         <h3>Delivery</h3>
-                        <p>280+ Workers</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
+                        <p>280+ Experts Available</p>
+                    </a>
+                    <a href="category-tech-services.html" class="category-card">
+                        <div class="category-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3>Tech Services</h3>
-                        <p>210+ Workers</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-paint-roller"></i>
-                        </div>
-                        <h3>Painting</h3>
-                        <p>190+ Workers</p>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <h3>Catering</h3>
-                        <p>175+ Workers</p>
-                    </div>
+                        <p>210+ Experts Available</p>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Workers Section -->
         <section class="featured-section">
             <div class="container">
-                <h2 class="section-title">Top-Rated Workers</h2>
+                <h2 class="section-title">Top-Rated Talent</h2>
                 <div class="workers-grid">
-                    <div class="worker-card">
-                        <div class="worker-verified">
-                            <i class="fas fa-check-circle"></i> Verified
-                        </div>
+                    <a href="worker-profile.html" class="worker-card">
+                        <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
                         <div class="worker-image">
-                            <img src="ade.jpg" alt="Worker name">
+                            <img src="ade.jpg" alt="Adejare Akolawole">
                         </div>
                         <div class="worker-info">
                             <h3>Adejare Akolawole</h3>
-                            <p class="worker-job">Electrician</p>
+                            <span class="worker-category">Electrician</span>
                             <div class="worker-rating">
                                 <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
                                 <span>4.8 (56 reviews)</span>
                             </div>
-                            <div class="worker-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Lagos, Nigeria</span>
-                            </div>
-                            <a href="worker-profile.html" class="btn btn-outline btn-sm">View Profile</a>
+                            <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
+                            <button class="btn btn-sm">Hire Now</button>
                         </div>
-                    </div>
-                    <div class="worker-card">
-                        <div class="worker-verified">
-                            <i class="fas fa-check-circle"></i> Verified
-                        </div>
+                    </a>
+                    <a href="worker-profile.html" class="worker-card">
+                        <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
                         <div class="worker-image">
-                            <img src="adeniji daniel.jpg" alt="Worker name">
-                        </div>
-                        <div class="worker-info">
-                            <h3>Adeniji Daniel</h3>
-                            <p class="worker-job">Home Cleaner</p>
-                            <div class="worker-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.9 (42 reviews)</span>
-                            </div>
-                            <div class="worker-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Abuja, Nigeria</span>
-                            </div>
-                            <a href="worker-profile.html" class="btn btn-outline btn-sm">View Profile</a>
-                        </div>
-                    </div>
-                    <div class="worker-card">
-                        <div class="worker-verified">
-                            <i class="fas fa-check-circle"></i> Verified
-                        </div>
-                        <div class="worker-image">
-                            <img src="tofunmi.jpg" alt="Worker name">
-                        </div>
-                        <div class="worker-info">
-                            <h3>Emeka Nwanze</h3>
-                            <p class="worker-job">Plumber</p>
-                            <div class="worker-rating">
-                                <i class="fas fa-star"></i>
-                                <span>4.7 (38 reviews)</span>
-                            </div>
-                            <div class="worker-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Port Harcourt, Nigeria</span>
-                            </div>
-                            <a href="worker-profile.html" class="btn btn-outline btn-sm">View Profile</a>
-                        </div>
-                    </div>
-                    <div class="worker-card">
-                        <div class="worker-verified">
-                            <i class="fas fa-check-circle"></i> Verified
-                        </div>
-                        <div class="worker-image">
-                            <img src="jerry.jpg" alt="Worker name">
+                            <img src="jerry.jpg" alt="Jeremiah">
                         </div>
                         <div class="worker-info">
                             <h3>Jeremiah</h3>
-                            <p class="worker-job">Mobile Developer</p>
+                            <span class="worker-category">Mobile Developer</span>
                             <div class="worker-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <span>4.9 (27 reviews)</span>
                             </div>
-                            <div class="worker-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Lagos, Nigeria</span>
-                            </div>
-                            <a href="worker-profile.html" class="btn btn-outline btn-sm">View Profile</a>
+                            <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
+                            <button class="btn btn-sm">Hire Now</button>
                         </div>
-                    </div>
+                    </a>
+                    <a href="worker-profile.html" class="worker-card">
+                        <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
+                        <div class="worker-image">
+                            <img src="fatima.jpg" alt="Fatima Ojo">
+                        </div>
+                        <div class="worker-info">
+                            <h3>Fatima Ojo</h3>
+                            <span class="worker-category">Plumber</span>
+                            <div class="worker-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7 (42 reviews)</span>
+                            </div>
+                            <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
+                            <button class="btn btn-sm">Hire Now</button>
+                        </div>
+                    </a>
+                    <a href="worker-profile.html" class="worker-card">
+                        <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
+                        <div class="worker-image">
+                            <img src="chinedu.jpg" alt="Chinedu Eze">
+                        </div>
+                        <div class="worker-info">
+                            <h3>Chinedu Eze</h3>
+                            <span class="worker-category">Graphic Designer</span>
+                            <div class="worker-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0 (19 reviews)</span>
+                            </div>
+                            <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
+                            <button class="btn btn-sm">Hire Now</button>
+                        </div>
+                    </a>
                 </div>
                 <div class="view-all-container">
-                    <a href="workers.html" class="btn btn-outline">View All Workers</a>
+                    <a href="workers.html" class="btn btn-outline">Browse All Talent</a>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Jobs Section -->
-        <section class="featured-section bg-light">
-            <div class="container">
-                <h2 class="section-title">Recent Jobs</h2>
-                <div class="jobs-grid">
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-category">Home Repair</div>
-                            <div class="job-budget">₦15,000 - ₦25,000</div>
-                        </div>
-                        <h3 class="job-title">Need Plumbing Work for New Bathroom</h3>
-                        <p class="job-description">Looking for an experienced plumber to install new pipes and fixtures
-                            in a newly constructed bathroom.</p>
-                        <div class="job-meta">
-                            <div class="job-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Lekki, Lagos</span>
-                            </div>
-                            <div class="job-time">
-                                <i class="fas fa-clock"></i>
-                                <span>Posted 2 days ago</span>
-                            </div>
-                        </div>
-                        <a href="job-details.html" class="btn btn-outline btn-sm">View Details</a>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-category">Tech Services</div>
-                            <div class="job-budget">₦30,000 - ₦45,000</div>
-                        </div>
-                        <h3 class="job-title">Website Redesign for Local Business</h3>
-                        <p class="job-description">Need a skilled web developer to redesign our existing business
-                            website with modern responsive design.</p>
-                        <div class="job-meta">
-                            <div class="job-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Ikeja, Lagos</span>
-                            </div>
-                            <div class="job-time">
-                                <i class="fas fa-clock"></i>
-                                <span>Posted 3 days ago</span>
-                            </div>
-                        </div>
-                        <a href="job-details.html" class="btn btn-outline btn-sm">View Details</a>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-category">Moving</div>
-                            <div class="job-budget">₦20,000</div>
-                        </div>
-                        <h3 class="job-title">Help Moving Apartment Furniture</h3>
-                        <p class="job-description">Looking for 2 strong individuals to help move furniture from a
-                            2-bedroom apartment to a new location.</p>
-                        <div class="job-meta">
-                            <div class="job-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Abuja, FCT</span>
-                            </div>
-                            <div class="job-time">
-                                <i class="fas fa-clock"></i>
-                                <span>Posted 1 day ago</span>
-                            </div>
-                        </div>
-                        <a href="job-details.html" class="btn btn-outline btn-sm">View Details</a>
-                    </div>
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-category">Cleaning</div>
-                            <div class="job-budget">₦12,000</div>
-                        </div>
-                        <h3 class="job-title">Deep Cleaning for 3BR House</h3>
-                        <p class="job-description">Need thorough cleaning of a 3-bedroom house, including kitchen,
-                            bathrooms, and windows.</p>
-                        <div class="job-meta">
-                            <div class="job-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Port Harcourt</span>
-                            </div>
-                            <div class="job-time">
-                                <i class="fas fa-clock"></i>
-                                <span>Posted 5 days ago</span>
-                            </div>
-                        </div>
-                        <a href="job-details.html" class="btn btn-outline btn-sm">View Details</a>
-                    </div>
-                </div>
-                <div class="view-all-container">
-                    <a href="jobs.html" class="btn btn-outline">View All Jobs</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works Section -->
-        <section class="how-it-works-section">
+        <section class="how-it-works-section" id="how-it-works">
             <div class="container">
                 <h2 class="section-title">How Chavings Works</h2>
                 <div class="steps-container">
                     <div class="step-card">
                         <div class="step-number">1</div>
-                        <div class="step-icon">
-                            <i class="fas fa-edit"></i>
-                        </div>
+                        <div class="step-icon"><i class="fas fa-edit"></i></div>
                         <h3>Post a Job</h3>
-                        <p>Describe what you need, set your budget, and specify location</p>
+                        <p>Tell us what you need, set your budget, and pick a time.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-number">2</div>
-                        <div class="step-icon">
-                            <i class="fas fa-user-check"></i>
-                        </div>
-                        <h3>Connect with Workers</h3>
-                        <p>Review profiles of verified workers and choose the best match</p>
+                        <div class="step-icon"><i class="fas fa-users"></i></div>
+                        <h3>Match with Talent</h3>
+                        <p>Get connected to verified pros in Lagos instantly.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-number">3</div>
-                        <div class="step-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Secure Payment</h3>
-                        <p>Payments held in escrow until you're satisfied with the job</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">4</div>
-                        <div class="step-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h3>Review & Complete</h3>
-                        <p>Rate your experience and release payment when satisfied</p>
+                        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3>Get It Done</h3>
+                        <p>Pay securely after the job’s completed to your satisfaction.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Trust & Safety Section -->
-        <section class="trust-section bg-light">
+        <section class="testimonials-section">
             <div class="container">
-                <h2 class="section-title">Trust & Safety Features</h2>
-                <div class="trust-features">
-                    <div class="trust-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-id-card"></i>
+                <h2 class="section-title">What Our Users Say</h2>
+                <div class="testimonials-slider">
+                    <div class="testimonials-track">
+                        <div class="testimonial-card">
+                            <p>"Chavings helped me find a reliable plumber in hours. Saved my weekend!"</p>
+                            <h4>Tolu A., Lagos</h4>
+                            <div class="rating"><i class="fas fa-star"></i> 5.0</div>
                         </div>
-                        <div class="feature-content">
-                            <h3>ID Verification</h3>
-                            <p>All workers go through a strict ID verification process</p>
+                        <div class="testimonial-card">
+                            <p>"As a developer, I’ve landed steady gigs through Chavings. Great platform!"</p>
+                            <h4>Chidi O., Lagos</h4>
+                            <div class="rating"><i class="fas fa-star"></i> 4.8</div>
                         </div>
-                    </div>
-                    <div class="trust-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-video"></i>
+                        <div class="testimonial-card">
+                            <p>"I hired a cleaner through Chavings, and the service was top-notch!"</p>
+                            <h4>Aisha B., Lagos</h4>
+                            <div class="rating"><i class="fas fa-star"></i> 4.9</div>
                         </div>
-                        <div class="feature-content">
-                            <h3>Live Video Verification</h3>
-                            <p>Verify workers through live video calls before hiring</p>
-                        </div>
-                    </div>
-                    <div class="trust-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h3>Secure Payments</h3>
-                            <p>Money held in escrow until job is completed satisfactorily</p>
+                        <div class="testimonial-card">
+                            <p>"The best platform for finding skilled workers in Lagos. Highly recommend!"</p>
+                            <h4>Kemi D., Lagos</h4>
+                            <div class="rating"><i class="fas fa-star"></i> 5.0</div>
                         </div>
                     </div>
-                    <div class="trust-feature">
-                        <div class="feature-icon">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h3>Emergency SOS</h3>
-                            <p>One-click emergency button for immediate assistance</p>
-                        </div>
-                    </div>
+                    <button class="slider-arrow slider-arrow-left"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-arrow slider-arrow-right"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="cta-section">
             <div class="container">
                 <div class="cta-content">
-                    <h2>Ready to Find the Right Help?</h2>
-                    <p>Join thousands of Nigerians getting work done efficiently and safely.</p>
+                    <h2>Start Today—Hire or Earn in Lagos</h2>
+                    <p>Join a growing community of clients and skilled workers.</p>
                     <div class="cta-buttons">
-                        <a href="Get-started.html" class="btn btn-primary">Get Started Now</a>
-                        <a href="how-it-works.html" class="btn btn-outline">Learn More</a>
+                        <a href="signup.html" class="btn btn-primary">Join Now</a>
+                        <a href="post-job.html" class="btn btn-secondary">Post a Job</a>
                     </div>
                 </div>
             </div>
@@ -414,64 +273,39 @@
             <div class="footer-grid">
                 <div class="footer-logo">
                     <img src="chaving logopurplr.png" alt="Chavings Logo">
-                    <p>Connecting skilled workers with everyday needs across Nigeria.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+                    <p>Your trusted platform for local talent in Lagos.</p>
                 </div>
                 <div class="footer-links">
-                    <h3>Quick Links</h3>
+                    <h3>Company</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="jobs.html">Find Jobs</a></li>
-                        <li><a href="workers.html">Find Workers</a></li>
-                        <li><a href="how-it-works.html">How it Works</a></li>
                         <li><a href="about.html">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h3>For Workers</h3>
-                    <ul>
-                        <li><a href="become-worker.html">Become a Worker</a></li>
-                        <li><a href="worker-safety.html">Safety Guidelines</a></li>
-                        <li><a href="worker-faq.html">Worker FAQ</a></li>
-                        <li><a href="worker-resources.html">Resources</a></li>
-                        <li><a href="worker-success.html">Success Stories</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h3>For Clients</h3>
                     <ul>
                         <li><a href="post-job.html">Post a Job</a></li>
-                        <li><a href="hiring-guide.html">Hiring Guide</a></li>
-                        <li><a href="payment-info.html">Payment Information</a></li>
-                        <li><a href="client-faq.html">Client FAQ</a></li>
-                        <li><a href="client-support.html">Support</a></li>
+                        <li><a href="workers.html">Hire Talent</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Adeola Odeku Street, Victoria Island, Lagos</p>
-                    <p><i class="fas fa-phone"></i> +234 800 CHAVINGS</p>
-                    <p><i class="fas fa-envelope"></i> support@chavingstasker.com</p>
+                <div class="footer-links">
+                    <h3>For Workers</h3>
+                    <ul>
+                        <li><a href="job-search.html">Find Jobs</a></li>
+                        <li><a href="become-worker.html">Join as Talent</a></li>
+                        <li><a href="safety.html">Safety Tips</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Chavings. All rights reserved.</p>
-                <div class="footer-legal">
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="cookies.html">Cookie Policy</a>
-                </div>
+                <p>© 2025 Chavings Tasker. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="main.js"></script>
-    <script src="components.js"></script>
 </body>
-
 </html>
