@@ -6,13 +6,15 @@
     <title>Chavings Tasker - Hire Skilled Workers in Lagos</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
     <header class="main-header">
         <div class="container">
             <div class="logo">
-                <img src="chaving logopurplr.png" alt="Chavings Logo">
+                <canvas id="logoCanvas" class="logo-canvas"></canvas>
+                <img src="chaving logopurplr.png" alt="Chavings Logo" class="logo-fallback" style="display: none;">
             </div>
             <nav class="main-nav">
                 <ul>
@@ -44,7 +46,7 @@
         <section class="hero-section">
             <div class="hero-video-container">
                 <video class="hero-video" autoplay loop muted playsinline>
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    <source src="web vid.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="hero-overlay"></div>
@@ -82,22 +84,30 @@
                 <h2 class="section-title">Explore Top Categories</h2>
                 <div class="categories-grid">
                     <a href="category-home-repairs.html" class="category-card">
-                        <div class="category-icon"><i class="fas fa-hammer"></i></div>
+                        <div class="category-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
                         <h3>Home Repairs</h3>
                         <p>450+ Experts Available</p>
                     </a>
                     <a href="category-cleaning.html" class="category-card">
-                        <div class="category-icon"><i class="fas fa-broom"></i></div>
+                        <div class="category-icon">
+                            <i class="fas fa-broom"></i>
+                        </div>
                         <h3>Cleaning</h3>
                         <p>320+ Experts Available</p>
                     </a>
                     <a href="category-delivery.html" class="category-card">
-                        <div class="category-icon"><i class="fas fa-truck"></i></div>
+                        <div class="category-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
                         <h3>Delivery</h3>
                         <p>280+ Experts Available</p>
                     </a>
                     <a href="category-tech-services.html" class="category-card">
-                        <div class="category-icon"><i class="fas fa-laptop-code"></i></div>
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
                         <h3>Tech Services</h3>
                         <p>210+ Experts Available</p>
                     </a>
@@ -169,26 +179,6 @@
                             <button class="btn btn-sm">Hire Now</button>
                         </div>
                     </a>
-                    <a href="worker-profile.html" class="worker-card">
-                        <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
-                        <div class="worker-image">
-                            <img src="chinedu.jpg" alt="Chinedu Eze">
-                        </div>
-                        <div class="worker-info">
-                            <h3>Chinedu Eze</h3>
-                            <span class="worker-category">Graphic Designer</span>
-                            <div class="worker-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>5.0 (19 reviews)</span>
-                            </div>
-                            <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
-                            <button class="btn btn-sm">Hire Now</button>
-                        </div>
-                    </a>
                 </div>
                 <div class="view-all-container">
                     <a href="workers.html" class="btn btn-outline">Browse All Talent</a>
@@ -202,19 +192,25 @@
                 <div class="steps-container">
                     <div class="step-card">
                         <div class="step-number">1</div>
-                        <div class="step-icon"><i class="fas fa-edit"></i></div>
+                        <div class="step-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
                         <h3>Post a Job</h3>
                         <p>Tell us what you need, set your budget, and pick a time.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-number">2</div>
-                        <div class="step-icon"><i class="fas fa-users"></i></div>
+                        <div class="step-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
                         <h3>Match with Talent</h3>
                         <p>Get connected to verified pros in Lagos instantly.</p>
                     </div>
                     <div class="step-card">
                         <div class="step-number">3</div>
-                        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="step-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
                         <h3>Get It Done</h3>
                         <p>Pay securely after the job’s completed to your satisfaction.</p>
                     </div>
@@ -255,13 +251,20 @@
         </section>
 
         <section class="cta-section">
+            <div class="cta-background">
+                <video class="cta-video" autoplay loop muted playsinline>
+                    <source src="web vid.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="cta-overlay"></div>
+            </div>
             <div class="container">
                 <div class="cta-content">
-                    <h2>Start Today—Hire or Earn in Lagos</h2>
-                    <p>Join a growing community of clients and skilled workers.</p>
-                    <div class="cta-buttons">
-                        <a href="signup.html" class="btn btn-primary">Join Now</a>
-                        <a href="post-job.html" class="btn btn-secondary">Post a Job</a>
+                    <h2 class="cta-heading animate-text">Unlock Your Potential in Lagos</h2>
+                    <p class="cta-subheading animate-text">Hire top talent or start earning today with Chavings.</p>
+                    <div class="cta-buttons animate-buttons">
+                        <a href="signup.html" class="btn btn-primary cta-btn">Join Now</a>
+                        <a href="post-job.html" class="btn btn-secondary cta-btn">Post a Job</a>
                     </div>
                 </div>
             </div>

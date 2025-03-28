@@ -1,4 +1,63 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Helper function to create a 3D scene for the logo
+    function create3DScene(canvas) {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+        // Create the 3D logo (torus knot)
+        const geometry = new THREE.TorusKnotGeometry(0.7, 0.2, 100, 16);
+        const material = new THREE.MeshPhongMaterial({ color: 0x6A0DAD, shininess: 100 });
+        const model = new THREE.Mesh(geometry, material);
+        scene.add(model);
+
+        // Add lighting
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        camera.position.z = 3;
+
+        // Resize handler
+        const onResize = () => {
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        };
+        window.addEventListener('resize', onResize);
+
+        return { scene, camera, renderer, model, onResize };
+    }
+
+    // 3D Logo in Header
+    const logoCanvas = document.getElementById('logoCanvas');
+    const logoFallback = document.querySelector('.logo-fallback');
+    if (logoCanvas && typeof THREE !== 'undefined') {
+        try {
+            const { scene, camera, renderer, model, onResize } = create3DScene(logoCanvas);
+
+            const animate = function () {
+                requestAnimationFrame(animate);
+                model.rotation.x += 0.01;
+                model.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            };
+            animate();
+
+            window.addEventListener('resize', onResize);
+        } catch (error) {
+            console.error('Failed to initialize 3D logo:', error);
+            logoCanvas.style.display = 'none';
+            if (logoFallback) logoFallback.style.display = 'block';
+        }
+    } else {
+        if (logoCanvas) logoCanvas.style.display = 'none';
+        if (logoFallback) logoFallback.style.display = 'block';
+    }
+
     // Mobile menu toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const mainNav = document.querySelector('.main-nav');
@@ -102,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Animate elements when they come into view
-    const animateElements = document.querySelectorAll('.category-card, .worker-card, .step-card');
+    const animateElements = document.querySelectorAll('.category-card, .worker-card, .step-card, .cta-heading, .cta-subheading, .cta-buttons');
 
     if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries) => {
@@ -129,19 +188,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (testimonialsSlider && testimonialsTrack && testimonialCards.length > 0) {
         let currentIndex = 0;
         const totalCards = testimonialCards.length;
-        let cardsToShow = window.innerWidth <= 768 ? 1 : 2; // 1 card on mobile, 2 on desktop
+        let cardsToShow = window.innerWidth <= 768 ? 1 : 2;
         let autoSlideInterval;
 
-        // Clone first and last cards for infinite loop effect
         const firstClone = testimonialCards[0].cloneNode(true);
         const lastClone = testimonialCards[totalCards - 1].cloneNode(true);
         testimonialsTrack.appendChild(firstClone);
         testimonialsTrack.insertBefore(lastClone, testimonialCards[0]);
 
-        const allCards = document.querySelectorAll('.testimonial-card'); // Including clones
-        const cardWidth = allCards[0].offsetWidth + (window.innerWidth <= 768 ? 16 : 32); // Including margin
+        const allCards = document.querySelectorAll('.testimonial-card');
+        const cardWidth = allCards[0].offsetWidth + (window.innerWidth <= 768 ? 16 : 32);
 
-        // Set initial position
         testimonialsTrack.style.transform = `translateX(-${cardWidth * (cardsToShow + 1)}px)`;
 
         const updateSlider = (direction) => {
@@ -154,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
             testimonialsTrack.style.transition = 'transform 0.5s ease-in-out';
             testimonialsTrack.style.transform = `translateX(-${cardWidth * (currentIndex + 1)}px)`;
 
-            // Handle infinite loop
             if (currentIndex === totalCards) {
                 setTimeout(() => {
                     testimonialsTrack.style.transition = 'none';
@@ -170,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        // Auto-slide every 5 seconds
         const startAutoSlide = () => {
             autoSlideInterval = setInterval(() => {
                 updateSlider('next');
@@ -181,7 +236,6 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(autoSlideInterval);
         };
 
-        // Manual navigation
         arrowRight.addEventListener('click', () => {
             stopAutoSlide();
             updateSlider('next');
@@ -194,14 +248,11 @@ document.addEventListener('DOMContentLoaded', function() {
             startAutoSlide();
         });
 
-        // Pause on hover
         testimonialsSlider.addEventListener('mouseenter', stopAutoSlide);
         testimonialsSlider.addEventListener('mouseleave', startAutoSlide);
 
-        // Start auto-slide on load
         startAutoSlide();
 
-        // Update cardsToShow on window resize
         window.addEventListener('resize', () => {
             const newCardsToShow = window.innerWidth <= 768 ? 1 : 2;
             if (newCardsToShow !== cardsToShow) {
@@ -209,6 +260,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const newCardWidth = allCards[0].offsetWidth + (window.innerWidth <= 768 ? 16 : 32);
                 testimonialsTrack.style.transition = 'none';
                 testimonialsTrack.style.transform = `translateX(-${newCardWidth * (currentIndex + 1)}px)`;
+            }
+        });
+    }
+
+    // Parallax effect for CTA section
+    const ctaSection = document.querySelector('.cta-section');
+    const ctaVideo = document.querySelector('.cta-video');
+
+    if (ctaSection && ctaVideo) {
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const sectionTop = ctaSection.offsetTop;
+            const sectionHeight = ctaSection.offsetHeight;
+            const windowHeight = window.innerHeight;
+
+            if (scrollPosition + windowHeight > sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                const offset = (scrollPosition - sectionTop) * 0.3; // Adjust parallax speed
+                ctaVideo.style.transform = `translateY(${offset}px)`;
             }
         });
     }
