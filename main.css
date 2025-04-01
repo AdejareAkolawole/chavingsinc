@@ -98,6 +98,11 @@ p { margin-bottom: var(--spacing-md); }
     border: 2px solid transparent;
 }
 
+.btn:focus {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
@@ -173,6 +178,8 @@ p { margin-bottom: var(--spacing-md); }
     top: 0;
     z-index: 1000;
     transition: transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 .main-header.sticky {
@@ -359,7 +366,7 @@ p { margin-bottom: var(--spacing-md); }
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.7), rgba(255, 215, 0, 0.3));
     z-index: -1;
 }
 
@@ -375,6 +382,13 @@ p { margin-bottom: var(--spacing-md); }
     color: white;
     margin-bottom: var(--spacing-xl);
     font-weight: 700;
+}
+
+.dynamic-tagline {
+    display: inline-block;
+    min-height: 60px;
+    vertical-align: middle;
+    transition: opacity 0.5s ease;
 }
 
 .search-box {
@@ -405,6 +419,10 @@ p { margin-bottom: var(--spacing-md); }
 
 .search-group input::placeholder {
     color: var(--text-light);
+}
+
+.hero-buttons {
+    margin-bottom: var(--spacing-lg);
 }
 
 .suggestions {
@@ -686,8 +704,10 @@ p { margin-bottom: var(--spacing-md); }
     margin-bottom: var(--spacing-md);
 }
 
-.worker-info .btn {
-    width: 100%;
+.worker-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
 }
 
 .view-all-container {
@@ -711,6 +731,50 @@ p { margin-bottom: var(--spacing-md); }
     width: 60px;
     height: 3px;
     background-color: var(--primary-color);
+}
+
+/* New Why Choose Us Section */
+.why-choose-us-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--light-bg);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.benefit-card {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.benefit-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.benefit-card h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+.benefit-card p {
+    font-size: var(--font-size-sm);
+    color: var(--text-light);
 }
 
 .how-it-works-section {
@@ -832,7 +896,8 @@ p { margin-bottom: var(--spacing-md); }
 
 .testimonial-card {
     flex: 0 0 50%;
-    background-color: var(--light-bg);
+    background-color: white;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-sm);
     padding: var(--spacing-lg);
@@ -862,7 +927,7 @@ p { margin-bottom: var(--spacing-md); }
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -873,7 +938,12 @@ p { margin-bottom: var(--spacing-md); }
 }
 
 .slider-arrow:hover {
-    background-color: var(--primary-color);
+    background-color: var(--primary-dark);
+}
+
+.slider-arrow:focus {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 2px;
 }
 
 .slider-arrow-left {
@@ -908,7 +978,7 @@ p { margin-bottom: var(--spacing-md); }
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: translateZ(0); /* For parallax effect */
+    transform: translateZ(0);
 }
 
 .cta-overlay {
@@ -917,7 +987,7 @@ p { margin-bottom: var(--spacing-md); }
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.7), rgba(255, 215, 0, 0.3));
 }
 
 .cta-content {
@@ -1033,6 +1103,39 @@ p { margin-bottom: var(--spacing-md); }
     width: 40px;
     height: 40px;
     margin-bottom: var(--spacing-sm);
+}
+
+.footer-logo p {
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+}
+
+.newsletter-signup {
+    margin-top: var(--spacing-lg);
+}
+
+.newsletter-signup h3 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.newsletter-form input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    flex: 1;
+    background-color: white;
+    color: var(--text-color);
+}
+
+.newsletter-form input:focus {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 2px;
 }
 
 .footer-links h3 {
@@ -1242,13 +1345,38 @@ p { margin-bottom: var(--spacing-md); }
         font-size: var(--font-size-xs);
     }
 
-    .worker-info .btn {
-        padding: 0.4rem 0.8rem;
-        font-size: var(--font-size-xs);
+    .worker-actions {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .worker-actions .btn {
+        width: 100%;
     }
 
     .view-all-container {
         margin-top: var(--spacing-md);
+    }
+
+    .why-choose-us-section {
+        padding: var(--spacing-md) 0;
+    }
+
+    .benefit-card {
+        padding: var(--spacing-sm);
+    }
+
+    .benefit-card i {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .benefit-card h3 {
+        font-size: var(--font-size-md);
+    }
+
+    .benefit-card p {
+        font-size: var(--font-size-xs);
     }
 
     .how-it-works-section {
@@ -1355,6 +1483,23 @@ p { margin-bottom: var(--spacing-md); }
 
     .footer-logo p {
         font-size: var(--font-size-sm);
+    }
+
+    .newsletter-signup {
+        margin-top: var(--spacing-md);
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .newsletter-form input {
+        width: 100%;
+    }
+
+    .newsletter-form .btn {
+        width: 100%;
     }
 
     .footer-links h3 {

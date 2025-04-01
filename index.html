@@ -45,19 +45,31 @@
     <main>
         <section class="hero-section">
             <div class="hero-video-container">
-                <video class="hero-video" autoplay loop muted playsinline>
+                <video class="hero-video" autoplay loop muted playsinline poster="hero-fallback.jpg">
                     <source src="https://videos.pexels.com/video-files/4828605/4828605-uhd_2732_1440_25fps.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h1>Our experts will get it done for you</h1>
+                    <h1>
+                        <span class="dynamic-tagline">Hire Top Talent in Lagos</span>
+                    </h1>
                     <form class="search-box">
                         <div class="search-group">
-                            <input type="text" placeholder="Search for any service...">
-                            <button type="submit" class="btn btn-search"><i class="fas fa-search"></i></button>
+                            <input type="text" list="service-suggestions" placeholder="Search for any service..." aria-label="Search for a service">
+                            <datalist id="service-suggestions">
+                                <option value="Plumbing">
+                                <option value="Cleaning">
+                                <option value="Tech Services">
+                                <option value="Delivery">
+                                <option value="Home Repairs">
+                            </datalist>
+                            <button type="submit" class="btn btn-search" aria-label="Search for a service"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
+                    <div class="hero-buttons">
+                        <a href="job-search.html" class="btn btn-secondary">Browse Services</a>
+                    </div>
                     <div class="suggestions">
                         <a href="job-search.html" class="suggestion-link">home repairs <i class="fas fa-arrow-right"></i></a>
                         <a href="job-search.html" class="suggestion-link">cleaning <i class="fas fa-arrow-right"></i></a>
@@ -122,7 +134,7 @@
                     <a href="worker-profile.html" class="worker-card">
                         <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
                         <div class="worker-image">
-                            <img src="ade.jpg" alt="Adejare Akolawole">
+                            <img src="ade.jpg" alt="Adejare Akolawole" loading="lazy">
                         </div>
                         <div class="worker-info">
                             <h3>Adejare Akolawole</h3>
@@ -136,13 +148,16 @@
                                 <span>4.8 (56 reviews)</span>
                             </div>
                             <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
-                            <button class="btn btn-sm">Hire Now</button>
+                            <div class="worker-actions">
+                                <button class="btn btn-sm btn-primary">Hire Now</button>
+                                <a href="worker-profile.html" class="btn btn-sm btn-outline">View Profile</a>
+                            </div>
                         </div>
                     </a>
                     <a href="worker-profile.html" class="worker-card">
                         <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
                         <div class="worker-image">
-                            <img src="jerry.jpg" alt="Jeremiah">
+                            <img src="jerry.jpg" alt="Jeremiah" loading="lazy">
                         </div>
                         <div class="worker-info">
                             <h3>Jeremiah</h3>
@@ -156,13 +171,16 @@
                                 <span>4.9 (27 reviews)</span>
                             </div>
                             <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
-                            <button class="btn btn-sm">Hire Now</button>
+                            <div class="worker-actions">
+                                <button class="btn btn-sm btn-primary">Hire Now</button>
+                                <a href="worker-profile.html" class="btn btn-sm btn-outline">View Profile</a>
+                            </div>
                         </div>
                     </a>
                     <a href="worker-profile.html" class="worker-card">
                         <div class="worker-verified"><i class="fas fa-check-circle"></i> Verified</div>
                         <div class="worker-image">
-                            <img src="fatima.jpg" alt="Fatima Ojo">
+                            <img src="fatima.jpg" alt="Fatima Ojo" loading="lazy">
                         </div>
                         <div class="worker-info">
                             <h3>Fatima Ojo</h3>
@@ -176,12 +194,38 @@
                                 <span>4.7 (42 reviews)</span>
                             </div>
                             <div class="worker-location"><i class="fas fa-map-marker-alt"></i> Lagos</div>
-                            <button class="btn btn-sm">Hire Now</button>
+                            <div class="worker-actions">
+                                <button class="btn btn-sm btn-primary">Hire Now</button>
+                                <a href="worker-profile.html" class="btn btn-sm btn-outline">View Profile</a>
+                            </div>
                         </div>
                     </a>
                 </div>
                 <div class="view-all-container">
                     <a href="workers.html" class="btn btn-outline">Browse All Talent</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-choose-us-section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Chavings Tasker?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Verified Talent</h3>
+                        <p>All workers are thoroughly vetted for quality and reliability.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure Payments</h3>
+                        <p>Pay safely after the job is done to your satisfaction.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Local Expertise</h3>
+                        <p>Find skilled professionals right in Lagos.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -244,8 +288,8 @@
                             <div class="rating"><i class="fas fa-star"></i> 5.0</div>
                         </div>
                     </div>
-                    <button class="slider-arrow slider-arrow-left"><i class="fas fa-chevron-left"></i></button>
-                    <button class="slider-arrow slider-arrow-right"><i class="fas fa-chevron-right"></i></button>
+                    <button class="slider-arrow slider-arrow-left" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-arrow slider-arrow-right" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
@@ -260,7 +304,7 @@
             </div>
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="cta-heading animate-text">Unlock Your Potential in Lagos</h2>
+                    <h2 class="cta-heading animate-text">Join Thousands of Happy Users in Lagos</h2>
                     <p class="cta-subheading animate-text">Hire top talent or start earning today with Chavings.</p>
                     <div class="cta-buttons animate-buttons">
                         <a href="Get-started.html" class="btn btn-primary cta-btn">Join Now</a>
@@ -277,6 +321,13 @@
                 <div class="footer-logo">
                     <img src="chaving logopurplr.png" alt="Chavings Logo">
                     <p>Your trusted platform for local talent in Lagos.</p>
+                    <div class="newsletter-signup">
+                        <h3>Stay Updated</h3>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="footer-links">
                     <h3>Company</h3>
@@ -310,5 +361,3 @@
     </footer>
 
     <script src="main.js"></script>
-</body>
-</html>
