@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
 <body>
+
     <header class="main-header">
         <div class="container">
             <div class="logo">
@@ -35,6 +36,9 @@
             </nav>
             <div class="auth-buttons">
                 <a href="Get-started.html" class="btn btn-join">Join Now</a>
+                <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
             <div class="mobile-menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -65,6 +69,7 @@
                                 <option value="Home Repairs">
                             </datalist>
                             <button type="submit" class="btn btn-search" aria-label="Search for a service"><i class="fas fa-search"></i></button>
+                            <div class="search-suggestions"></div>
                         </div>
                     </form>
                     <div class="hero-buttons">
@@ -94,29 +99,36 @@
         <section class="categories-section">
             <div class="container">
                 <h2 class="section-title">Explore Top Categories</h2>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="home-repairs">Home Repairs</button>
+                    <button class="filter-btn" data-filter="cleaning">Cleaning</button>
+                    <button class="filter-btn" data-filter="delivery">Delivery</button>
+                    <button class="filter-btn" data-filter="tech-services">Tech Services</button>
+                </div>
                 <div class="categories-grid">
-                    <a href="category-home-repairs.html" class="category-card">
+                    <a href="category-home-repairs.html" class="category-card" data-category="home-repairs">
                         <div class="category-icon">
                             <i class="fas fa-hammer"></i>
                         </div>
                         <h3>Home Repairs</h3>
                         <p>450+ Experts Available</p>
                     </a>
-                    <a href="category-cleaning.html" class="category-card">
+                    <a href="category-cleaning.html" class="category-card" data-category="cleaning">
                         <div class="category-icon">
                             <i class="fas fa-broom"></i>
                         </div>
                         <h3>Cleaning</h3>
                         <p>320+ Experts Available</p>
                     </a>
-                    <a href="category-delivery.html" class="category-card">
+                    <a href="category-delivery.html" class="category-card" data-category="delivery">
                         <div class="category-icon">
                             <i class="fas fa-truck"></i>
                         </div>
                         <h3>Delivery</h3>
                         <p>280+ Experts Available</p>
                     </a>
-                    <a href="category-tech-services.html" class="category-card">
+                    <a href="category-tech-services.html" class="category-card" data-category="tech-services">
                         <div class="category-icon">
                             <i class="fas fa-laptop-code"></i>
                         </div>
@@ -139,6 +151,9 @@
                         <div class="worker-info">
                             <h3>Adejare Akolawole</h3>
                             <span class="worker-category">Electrician</span>
+                            <div class="worker-bio">
+                                <p>Experienced electrician with over 10 years in residential and commercial wiring.</p>
+                            </div>
                             <div class="worker-rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -162,6 +177,9 @@
                         <div class="worker-info">
                             <h3>Jeremiah</h3>
                             <span class="worker-category">Mobile Developer</span>
+                            <div class="worker-bio">
+                                <p>Skilled mobile developer specializing in iOS and Android app development.</p>
+                            </div>
                             <div class="worker-rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -185,6 +203,9 @@
                         <div class="worker-info">
                             <h3>Fatima Ojo</h3>
                             <span class="worker-category">Plumber</span>
+                            <div class="worker-bio">
+                                <p>Reliable plumber with expertise in fixing leaks and installing fixtures.</p>
+                            </div>
                             <div class="worker-rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -360,4 +381,10 @@
         </div>
     </footer>
 
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <script src="main.js"></script>
+</body>
+</html>
